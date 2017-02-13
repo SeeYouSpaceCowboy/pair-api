@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       Auth.encrypt({ user_id: @user.id })
-      render json: @user, status: :created, location: @user
+      render json: @user #, status: :created, location: @user
     # else
     #   render json: @user.errors, status: :unprocessable_entity
     end
