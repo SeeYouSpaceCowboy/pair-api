@@ -29,22 +29,24 @@ ActiveRecord::Schema.define(version: 20170213170532) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "user_friends", force: :cascade do |t|
+  create_table "user_friends", id: false, force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["friend_id", "user_id"], name: "index_user_friends_on_friend_id_and_user_id", unique: true, using: :btree
+    t.index ["user_id", "friend_id"], name: "index_user_friends_on_user_id_and_friend_id", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
     t.string   "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
+  
   has_many :stock_users
   has_many :stocks, through: :stock_users
 
