@@ -12,14 +12,12 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
-
-
   # POST /users
   def create
     @user = User.new(user_params)
     if @user.save
       jwt = Auth.encrypt({ user_id: @user.id })
-      render json: { jwt: jwt }
+      render json: { jwt: jwt, user: @user }
     end
   end
 
