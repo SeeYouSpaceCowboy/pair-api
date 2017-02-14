@@ -18,14 +18,21 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      Auth.encrypt({ user_id: @user.id })
-      render json: @user, status: :created, location: @user
-    # else
-    #   render json: @user.errors, status: :unprocessable_entity
+      jwt = Auth.encrypt({ user_id: @user.id })
+
+      render json: { jwt: jwt }
     end
   end
 
+  def login
+    @user = User.find_by(email: params[:email])
 
+    if @user && @user.authenticate(params[:password])
+      jwt = Auth.encrypt({ user_id: @user.id })
+
+      render json: { jwt: jwt }
+    end
+  end
 
   # PATCH/PUT /users/1
   def update
