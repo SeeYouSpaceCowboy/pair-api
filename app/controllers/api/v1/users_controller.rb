@@ -19,7 +19,6 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       jwt = Auth.encrypt({ user_id: @user.id })
-
       render json: { jwt: jwt }
     end
   end
@@ -29,7 +28,6 @@ class Api::V1::UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       jwt = Auth.encrypt({ user_id: @user.id })
-
       render json: { jwt: jwt }
     end
   end
