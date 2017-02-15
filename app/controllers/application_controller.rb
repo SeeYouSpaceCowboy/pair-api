@@ -15,4 +15,9 @@ class ApplicationController < ActionController::API
     password = Base64.encode64('d64068e08bebe12456c64df5ab5599d0:c1d7e9717d853f7bc6ee5d003bab2df5')
     password = 'Basic ' + password.to_s
   end
+
+  def api_call(url)
+    all_stocks = RestClient.get(url, {:'Authorization' => password })
+    response = JSON.parse(all_stocks)
+  end
 end
