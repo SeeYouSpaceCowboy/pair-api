@@ -1,7 +1,6 @@
 class Auth
-
   ALGORITHM='HS256'
-  
+
   def self.encrypt(hash)
     JWT.encode(hash, secret_key, ALGORITHM)
   end
@@ -13,5 +12,4 @@ class Auth
   def self.secret_key
     "649ec52f292d6e263a9440bb34c950e9bce4be8d6c1106bf12b09ff1ceda0713c224b0fe1558b20666e55f997eefba40df6d3b7d1795343dff14509e1e7622c1"
   end
-
 end
