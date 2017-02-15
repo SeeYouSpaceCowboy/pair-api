@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user
+  # before_action :set_user
 
   # GET /users
   def index
@@ -46,7 +46,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
-  
+    def set_user
+      @user = User.find(params[:id])
+    end
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.permit(:username, :password, :password_confirmation, :first_name, :last_name, :email, :avatar)
