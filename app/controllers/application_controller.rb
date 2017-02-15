@@ -10,4 +10,9 @@ class ApplicationController < ActionController::API
 
     @user
   end
+
+  def password
+    password = Base64.encode64('d64068e08bebe12456c64df5ab5599d0:c1d7e9717d853f7bc6ee5d003bab2df5')
+    password = 'Basic ' + password.to_s
+  end
 end
