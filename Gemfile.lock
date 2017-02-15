@@ -64,6 +64,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.0)
+    json (2.0.2)
     jsonapi (0.1.1.beta6)
       jsonapi-parser (= 0.1.1.beta3)
       jsonapi-renderer (= 0.1.1.beta1)
@@ -160,6 +161,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   dotenv-rails
+  json
   jwt
   listen (~> 3.0.5)
   pg (~> 0.18)
