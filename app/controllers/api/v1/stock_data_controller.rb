@@ -15,14 +15,17 @@ class Api::V1::StockDataController < ApplicationController
   def index
     @stocks = Stock.all
     if @stocks.length > 1
-      stock_list = @stocks.collect {|stock| stock.symbol}
+      stock_list = @stocks.collect {|stock|
 
       # historical_data endpoint
-      # https://api.intrinio.com/historical_data?identifier={symbol}&item={tag}
-      url = "https://api.intrinio.com/data_point?ticker=#{stock_list.join(',')}&F&item=last_price"
+      url = "https://api.intrinio.com/historical_data?ticker=#{stock.symbol}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
 
       response = api_call(url)
-      render json: response
+      response[:company_name] = stock.company_name
+      response
+      }
+
+      render json: stock_list
     else
       render json: {data: 'no stocks'}
     end
