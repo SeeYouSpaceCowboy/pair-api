@@ -15,11 +15,9 @@ class Api::V1::CommentsController < ApplicationController
   # POST /comments
   def create
     @comments = Comment.new(comment_params)
-
     if @comments.save
-      render json: @comments 
-    # else
-    #   render json: @comments.errors, status: :unprocessable_entity
+      render json: @comments
+    # grab current user here 
     end
   end
 
