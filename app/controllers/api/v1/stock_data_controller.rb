@@ -44,6 +44,8 @@ class Api::V1::StockDataController < ApplicationController
 
     response = api_call(url)
     response[:company_name] = stock.company_name
+    response = response[0..4]
+    
     render json: response
   end
 
