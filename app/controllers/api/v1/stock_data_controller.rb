@@ -40,9 +40,10 @@ class Api::V1::StockDataController < ApplicationController
   end
 
   def show
-    url = "https://api.intrinio.com/data_point?ticker=#{params[:id]}&item=last_price"
+    url = "https://api.intrinio.com/historical_data?ticker=#{stock.symbol}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
 
     response = api_call(url)
+    response[:company_name] = stock.company_name
     render json: response
   end
 
