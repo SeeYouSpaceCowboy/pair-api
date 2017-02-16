@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: current_user 
+    render json: get_current_user
   end
 
   # POST /users
