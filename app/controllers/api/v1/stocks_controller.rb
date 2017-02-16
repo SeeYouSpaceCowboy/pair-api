@@ -17,18 +17,12 @@ class Api::V1::StocksController < ApplicationController
     @stock = Stock.new(stock_params)
 
     if @stock.save
-      render json: @stock, status: :created, location: @stock
-    else
-      render json: @stock.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /stocks/1
-  def update
-    if @stock.update(stock_params)
-      render json: @stock
-    else
-      render json: @stock.errors, status: :unprocessable_entity
+      get_current_user.stocks << @stock
+      url = "https://api.intrinio.com/historical_data?ticker=#{@stock.symbol}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
+      response = api_call(url)
+      response[:company_name] = @stock.company_name
+      print response
+      render json: response
     end
   end
 

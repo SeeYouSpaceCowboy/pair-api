@@ -13,8 +13,8 @@ class Api::V1::StockDataController < ApplicationController
   # Dividend & Yield
 
   def index
-    @stocks = Stock.all
-    if @stocks.length > 1
+    @stocks = get_current_user.stocks
+    if @stocks.length > 0
       stock_list = @stocks.collect {|stock|
 
       # historical_data endpoint
@@ -27,7 +27,7 @@ class Api::V1::StockDataController < ApplicationController
 
       render json: stock_list
     else
-      render json: {data: 'no stocks'}
+      render json: {na: 'no stocks'}
     end
   end
 

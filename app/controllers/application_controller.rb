@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
     token = request.headers['HTTP_AUTHORIZATION']
 
     if token
-      user_infor = Auth.decode(token)
+      user_info = Auth.decode(token)
       @user ||= User.find(user_info['user_id'])
     end
 
