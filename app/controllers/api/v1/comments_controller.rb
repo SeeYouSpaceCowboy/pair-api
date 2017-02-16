@@ -17,9 +17,9 @@ class Api::V1::CommentsController < ApplicationController
     @comments = Comment.new(comment_params)
 
     if @comments.save
-      render json: @comments, status: :created, location: @comments
-    else
-      render json: @comments.errors, status: :unprocessable_entity
+      render json: @comments 
+    # else
+    #   render json: @comments.errors, status: :unprocessable_entity
     end
   end
 
@@ -27,8 +27,7 @@ class Api::V1::CommentsController < ApplicationController
   def update
     if @comments.update(comment_params)
       render json: @comments
-    else
-      render json: @comments.errors, status: :unprocessable_entity
+
     end
   end
 
@@ -45,6 +44,6 @@ class Api::V1::CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comments).permit(:message, :stock_id, :user_id)
+      params.permit(:message, :stock_id, :user_id)
     end
 end
