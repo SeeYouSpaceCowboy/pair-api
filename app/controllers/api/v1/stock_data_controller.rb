@@ -35,6 +35,7 @@ class Api::V1::StockDataController < ApplicationController
     url = "https://api.intrinio.com/companies?query=#{params[:id]}"
 
     response = api_call(url)
+    response = response['data'][0..4]
     render json: response
 
   end
@@ -44,8 +45,8 @@ class Api::V1::StockDataController < ApplicationController
 
     response = api_call(url)
     response[:company_name] = stock.company_name
-    response = response[0..4]
-    
+
+
     render json: response
   end
 
