@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :stocks
       resources :users
+      post 'unfollow', to: 'stocks#destroy'
       post 'signup', to: 'users#create', as: 'signup'
       post 'login', to: 'users#login', as: 'login'
       get 'fetchstocks', to: 'stock_data#index', as: 'fetchstocks'
