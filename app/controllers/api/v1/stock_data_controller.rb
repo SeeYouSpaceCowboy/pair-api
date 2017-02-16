@@ -13,18 +13,25 @@ class Api::V1::StockDataController < ApplicationController
   # Dividend & Yield
 
   def index
+
     @stocks = get_current_user.stocks
     if @stocks.length > 0
       stock_list = @stocks.collect {|stock|
 
-      # historical_data endpoint
-      url = "https://api.intrinio.com/historical_data?ticker=#{stock.symbol}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
+      date = "2017-02-15"
+      url = "https://api.intrinio.com/prices?ticker=#{stock.symbol}&start_date=#{date}&end_date=#{date}"
 
       response = api_call(url)
       response[:company_name] = stock.company_name
+      response[:identifier] = stock.symbol
+
+      url = "https://api.intrinio.com/historical_data?ticker=#{stock.symbol}&item=marketcap&start_date=#{date}&end_date=#{date}"
+      market_cap = api_call(url)
+
+      response["data"][0][:market_cap] = market_cap["data"][0]["value"]
+
       response
       }
-
       render json: stock_list
     else
       render json: {na: 'no stocks'}
