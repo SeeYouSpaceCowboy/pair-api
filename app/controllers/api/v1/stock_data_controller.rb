@@ -24,7 +24,7 @@ class Api::V1::StockDataController < ApplicationController
 
       response = api_call(url)
       response[:company_name] = stock.company_name
-      response[:identifier] = stock.ticker
+      response[:ticker] = stock.ticker
 
       url = "https://api.intrinio.com/historical_data?ticker=#{stock.ticker}&item=marketcap&start_date=#{date}&end_date=#{date}"
       market_cap = api_call(url)
@@ -36,7 +36,7 @@ class Api::V1::StockDataController < ApplicationController
 
     # => FAKE DATA TO AVOID API CALL
       #   stock_data = {
-      #     identifier: "#{stock.ticker}",
+      #     ticker: "#{stock.ticker}",
       #     company_name: "#{stock.company_name}",
       #     data: [{
       #       open: 1,
