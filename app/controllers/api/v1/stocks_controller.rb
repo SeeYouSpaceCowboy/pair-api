@@ -14,7 +14,7 @@ class Api::V1::StocksController < ApplicationController
 
   # POST /stocks
   def create
-    @stock = Stock.create_with(company_name: stock_params[:company_name]).find_or_create_by(ticker: stock_params[:ticker])
+    @stock = Stock.create_with(company_name: stock_params[:company_name]).find_or_create_by(ticker: params[:ticker])
 
     if @stock.save
       get_current_user.stocks << @stock
