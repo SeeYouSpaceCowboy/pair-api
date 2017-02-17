@@ -19,13 +19,13 @@ class Api::V1::StocksController < ApplicationController
     if @stock.save
       date = "2017-02-16"
       get_current_user.stocks << @stock
-      url = "https://api.intrinio.com/prices?ticker=#{@stock.ticker}&start_date=#{date}&end_date=#{date}"
-      response = api_call(url)
-      url = "https://api.intrinio.com/historical_data?ticker=#{@stock.ticker}&item=marketcap&start_date=#{date}&end_date=#{date}"
-      market_cap = api_call(url)
-      response["data"][0][:market_cap] = market_cap["data"][0]["value"]
+      
+      # url = "https://api.intrinio.com/prices?ticker=#{@stock.ticker}&start_date=#{date}&end_date=#{date}"
+      # response = api_call(url)
+
       response[:company_name] = @stock.company_name
       response[:ticker] = @stock.ticker
+      response[:last_price] = @stock.last_price
       render json: response
     end
   end
