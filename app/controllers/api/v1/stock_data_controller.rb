@@ -49,6 +49,7 @@ class Api::V1::StockDataController < ApplicationController
       #   stock_data
       # }
       #  END OF FAKE DATA
+    end
 
       render json: stock_list
     else
