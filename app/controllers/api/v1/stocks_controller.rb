@@ -14,11 +14,11 @@ class Api::V1::StocksController < ApplicationController
 
   # POST /stocks
   def create
-    @stock = Stock.create_with(company_name: stock_params[:company_name]).find_or_create_by(symbol: stock_params[:symbol])
+    @stock = Stock.create_with(company_name: stock_params[:company_name]).find_or_create_by(ticker: stock_params[:ticker])
 
     if @stock.save
       get_current_user.stocks << @stock
-      url = "https://api.intrinio.com/historical_data?ticker=#{@stock.symbol}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
+      url = "https://api.intrinio.com/historical_data?ticker=#{@stock.ticker}&item=close_price&start_date=2017-02-15&end_date=2017-02-15"
       response = api_call(url)
       response[:company_name] = @stock.company_name
       render json: response
@@ -27,9 +27,9 @@ class Api::V1::StocksController < ApplicationController
 
   # DELETE /stocks/1
   def destroy
-    @stock = Stock.find_by(symbol: params[:symbol])
+    @stock = Stock.find_by(ticker: params[:ticker])
     get_current_user.stock_users.find_by(stock_id: @stock.id).destroy
-    render json: @stock.symbol
+    render json: @stock.ticker
   end
 
   private
@@ -40,6 +40,6 @@ class Api::V1::StocksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def stock_params
-      params.require(:stock).permit(:symbol, :company_name)
+      params.require(:stock).permit(:ticker, :company_name)
     end
 end

@@ -37,13 +37,22 @@ ActiveRecord::Schema.define(version: 20170214210442) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "user_friends", id: false, force: :cascade do |t|
+  create_table "user_followers", id: false, force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["friend_id", "user_id"], name: "index_user_friends_on_friend_id_and_user_id", unique: true, using: :btree
-    t.index ["user_id", "friend_id"], name: "index_user_friends_on_user_id_and_friend_id", unique: true, using: :btree
+    t.integer  "followee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["followee_id", "user_id"], name: "index_user_followers_on_followee_id_and_user_id", unique: true, using: :btree
+    t.index ["user_id", "followee_id"], name: "index_user_followers_on_user_id_and_followee_id", unique: true, using: :btree
+  end
+
+  create_table "user_following", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "followee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["followee_id", "user_id"], name: "index_user_following_on_followee_id_and_user_id", unique: true, using: :btree
+    t.index ["user_id", "followee_id"], name: "index_user_following_on_user_id_and_followee_id", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
