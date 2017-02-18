@@ -19,6 +19,11 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       jwt = Auth.encrypt({ user_id: @user.id })
       render json: { jwt: jwt, user: @user }
+    else
+      render json: {
+        error: "User failed to create",
+        status: 400
+      }, status: 400
     end
   end
 
@@ -28,6 +33,11 @@ class Api::V1::UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       jwt = Auth.encrypt({ user_id: @user.id })
       render json: { jwt: jwt, user: @user }
+    else
+      render json: {
+        error: "Username or Password Incorrect",
+        status: 400
+      }, status: 400
     end
   end
 
@@ -36,7 +46,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @user.errors, status: 400
     end
   end
 
