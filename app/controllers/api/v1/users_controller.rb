@@ -12,6 +12,10 @@ class Api::V1::UsersController < ApplicationController
     render json: get_current_user
   end
 
+  def fetch_user
+    render json: get_current_user
+  end
+
   # POST /users
   def create
     @user = User.new(user_params)
