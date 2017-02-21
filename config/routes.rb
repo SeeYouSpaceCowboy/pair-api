@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :stocks
       resources :users
+      resources :following
       post 'unfollow', to: 'stocks#destroy'
       post 'signup', to: 'users#create', as: 'signup'
       post 'login', to: 'users#login', as: 'login'
