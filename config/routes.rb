@@ -5,11 +5,11 @@ Rails.application.routes.draw do
       resources :stocks
       resources :users
       resources :following
-      post 'unfollow', to: 'stocks#destroy'
+      post 'unfollow', to: 'stocks#destroy', as: 'unfollow'
       post 'signup', to: 'users#create', as: 'signup'
       post 'login', to: 'users#login', as: 'login'
       get 'user', to: 'users#fetch_user'
-      get 'fetchstocks', to: 'stock_data#index', as: 'fetchstocks'
+      get 'fetchstocks/:email', to: 'stock_data#index', as: 'fetchstocks'
       get 'searchstocks/:id', to: 'stock_data#check_for_stock', as: 'searchstocks'
     end
   end

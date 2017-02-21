@@ -13,6 +13,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def fetch_user
+  
     render json: get_current_user
   end
 
