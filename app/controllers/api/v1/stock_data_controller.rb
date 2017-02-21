@@ -8,7 +8,7 @@ class Api::V1::StockDataController < ApplicationController
 
   def index
 
-    @stocks = get_current_user.stocks
+    @stocks = User.find_by(email: params[:email]).stocks
     if @stocks.length > 0
       stock_list = @stocks.collect {|stock|
 
@@ -64,6 +64,7 @@ class Api::V1::StockDataController < ApplicationController
   end
 
   def check_for_stock
+
     url = "https://api.intrinio.com/companies?query=#{params[:id]}"
 
     response = api_call(url)
