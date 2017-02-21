@@ -12,8 +12,12 @@ class Api::V1::UsersController < ApplicationController
     render json: get_current_user
   end
 
+  def show_by_username
+    @user = User.find_by(email: params[:email])
+    render json: @user
+  end
+
   def fetch_user
-    
     render json: get_current_user
   end
 
