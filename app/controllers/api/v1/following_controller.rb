@@ -3,8 +3,8 @@ class Api::V1::FollowingController < ApplicationController
 
   def index
     @user = get_current_user
-    if @user.followers.length > 0
-      render json: stock_list
+    if @user.user_followers.length > 0
+      render json: @user.user_followers
     else
       render json: {no_friends: 'user has no friends'}
     end
