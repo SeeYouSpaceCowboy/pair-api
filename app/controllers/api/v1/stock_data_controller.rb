@@ -73,8 +73,8 @@ class Api::V1::StockDataController < ApplicationController
   end
 
   def show
-    # url = "https://api.intrinio.com/historical_data?ticker=#{stock.ticker}&item=close_price&start_date=2017-02-16&end_date=2017-02-16"
-    # response = api_call(url)
+    url = "https://api.intrinio.com/historical_data?ticker=#{stock.ticker}&item=close_price&start_date=2017-02-16&end_date=2017-02-16"
+    response = api_call(url)
 
     stock_data = {
       ticker: "#{stock.ticker}",

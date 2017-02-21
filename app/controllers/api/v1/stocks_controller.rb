@@ -14,7 +14,7 @@ class Api::V1::StocksController < ApplicationController
 
   # POST /stocks
   def create
-    @stock = Stock.create(stock_params)
+    @stock = Stock.new(stock_params)
 
     if @stock.save
       date = "2017-02-16"
