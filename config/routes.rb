@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'signup', to: 'users#create', as: 'signup'
       post 'login', to: 'users#login', as: 'login'
       get 'user', to: 'users#fetch_user'
+      get 'user/:email', to: 'users#show_by_username'
       get 'fetchstocks/:email', to: 'stock_data#index', as: 'fetchstocks'
       get 'searchstocks/:id', to: 'stock_data#check_for_stock', as: 'searchstocks'
     end
