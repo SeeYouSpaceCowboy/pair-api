@@ -33,6 +33,7 @@ class Api::V1::StocksController < ApplicationController
   # DELETE /stocks/1
   def destroy
     @stock = Stock.find_by(ticker: params[:ticker])
+
     get_current_user.stock_users.find_by(stock_id: @stock.id).destroy
     render json: @stock.ticker
   end
