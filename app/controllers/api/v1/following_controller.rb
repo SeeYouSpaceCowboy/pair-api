@@ -18,7 +18,11 @@ class Api::V1::FollowingController < ApplicationController
   end
 
   def destroy
-
+    @user = get_current_user
+    @target_user = User.find_by(username: params[:username])
+    binding.pry
+    # @user.user_following.find { |user| user.id === @target_user.id }
+    render json: @user.user_following
   end
 
   private

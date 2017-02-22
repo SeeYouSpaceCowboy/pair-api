@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get 'fetchstocks/:email', to: 'stock_data#index', as: 'fetchstocks'
       get 'searchstocks/:id', to: 'stock_data#check_for_stock', as: 'searchstocks'
 
+      post 'unfollowuser', to: 'following#destroy'
       post 'following', to: 'following#create'
       get 'following/:username', to: 'following#fetch_following'
     end
