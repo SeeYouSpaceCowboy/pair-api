@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       post 'signup', to: 'users#create', as: 'signup'
       post 'login', to: 'users#login', as: 'login'
       get 'user', to: 'users#fetch_user'
-      get 'user/:email', to: 'users#show_by_username'
+      get 'user/:username', to: 'users#show_by_username'
 
       post 'unfollow', to: 'stocks#destroy', as: 'unfollow'
       get 'fetchstocks/:email', to: 'stock_data#index', as: 'fetchstocks'
