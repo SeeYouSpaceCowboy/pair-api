@@ -34,7 +34,7 @@ class Api::V1::StocksController < ApplicationController
   def destroy
     @stock = Stock.find_by(ticker: params[:ticker])
 
-    get_current_user.stock_users.find_by(stock_id: @stock.id).destroy
+    get_current_user.stock_users.find_by(stock_id: @stock.id).delete
     render json: @stock.ticker
   end
 
